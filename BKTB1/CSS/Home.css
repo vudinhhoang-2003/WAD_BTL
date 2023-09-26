@@ -1,1 +1,124 @@
-style
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+}
+
+header, nav, main, footer {
+    padding: 20px;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between; /* Cân chỉnh các phần tử bên trong theo chiều ngang */
+    align-items: center; /* Cân chỉnh các phần tử bên trong theo chiều dọc */
+}
+
+.logo-container img {
+    height: 50px; /* Điều chỉnh kích thước của logo */
+}
+
+.library-name h1 {
+    margin: 0;
+}
+
+.search-bar input {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    width: 250px;
+}
+
+.search-bar button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* CSS cho phần main */
+main {
+    padding: 20px;
+}
+
+.book-list {
+    margin-bottom: 30px;
+}
+
+.book-list h2 {
+    font-size: 24px;
+}
+
+.book-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.book-list li {
+    margin-bottom: 10px;
+}
+
+.book-list a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+
+
+/* CSS để định dạng footer và phần tử bên trong */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.about, .contact {
+    flex: 1;
+}
+
+.about, .contact h2 {
+    margin: 0;
+}
+
+.contact address {
+    font-style: normal;
+    line-height: 1.5;
+}
+
+.contact a {
+    color: #007bff;
+    text-decoration: none;
+}
