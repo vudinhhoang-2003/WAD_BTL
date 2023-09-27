@@ -1,5 +1,6 @@
 .thumbnail img {
     
   width: 100%;
-  height: 200px; /* Đặt chiều cao cố định cho ảnh */
+  height: 200px;
+  margin-inline-end: auto; /* Đặt chiều cao cố định cho ảnh */
 }
