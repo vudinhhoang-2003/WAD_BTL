@@ -35,6 +35,9 @@ section {
   height: auto;
 }
 
+.thumbnail {
+  height: 500px;
+}
 /* Footer*/
 .footer {
   background-color: lightyellow;
