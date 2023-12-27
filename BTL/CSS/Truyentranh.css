@@ -1,0 +1,55 @@
+/* VŨ ĐÌNH HOÀNG - 2121050409 */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+
+.header {
+  background-color: lightyellow;
+  color: green;
+  padding: 15px 0; /* Khoảng cách giữa nội dung và viền trên/dưới */
+  /* height:100px; */
+}
+
+.logo img {
+  width: 80px;
+  height: 80px;
+}
+
+
+/* Menu */
+.container-fluid {
+  margin: 5px;
+}
+
+/* Main */
+main {
+  margin-top: 50px;
+}
+section {
+  margin-bottom: 30px;
+}
+
+.thumbnail {
+  height: 400px;
+}
+
+.thumbnail .caption a:hover {
+  text-decoration: none;
+}
+
+.thumbnail .img-responsive {
+  width: 100%;
+  height: 70%;
+}
+
+/* Footer*/
+.footer {
+  background-color: lightyellow;
+  padding: 20px 0;
+}
+
+.footer p {
+  margin-bottom: 0;
+}
