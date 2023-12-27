@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Giới thiệu tác giả</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../CSS/Tacgia.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="logo text-left">
+            <a href="HomeAdmin.php"><img src="../Images/logo.png" alt="Logo"></a>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <h1 class="display-4">Đọc Sách Mỗi Ngày</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="HomeAdmin.php" style="color: green;">DocSachOnline</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="HomeAdmin.php">Trang chủ</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Thể loại<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../User/TruyenTranh.php">Truyện tranh</a></li>
+            <li><a href="LichSu.php">Lịch sử Việt Nam</a></li>
+            <li><a href="../User/VanHoc.php">Văn học</a></li>
+            <li><a href="Khac.php">Các thể loại khác</a></li>
+          </ul>
+        </li>
+        <li class="active"><a href="TacGiaAdmin.php">Tác giả</a></li>
+      </ul>
+      <a href="login.html" class="btn btn-danger navbar-btn navbar-right">Logout</a>
+      <form class="navbar-form navbar-right" action="Timkiem.php">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" name="search">
+        </div>
+        <button type="submit" class="btn btn-default">
+          <i class="fas fa-search"></i> <!-- Icon tìm kiếm từ Font Awesome -->
+        </button>
+      </form>
+
+    </div>
+  </nav>
+  
+  <!-- Content -->
+  <div class="container">
+    <?php
+    require 'connect.php';
+
+    if (isset($_GET['tacgia_id'])) {
+      $tacgia_id = $_GET['tacgia_id'];
+
+      $sql_tacgia = "SELECT * FROM tacgia WHERE tacgia_id = $tacgia_id";
+      $result_tacgia = $conn->query($sql_tacgia);
+
+      if ($result_tacgia->num_rows > 0) {
+        $row_tacgia = $result_tacgia->fetch_assoc();
+        echo '<h1>' . $row_tacgia["tentacgia"] . '</h1>';
+        echo '<p><b>Năm sinh:</b> ' . $row_tacgia["ngaysinh"] . '</p>';
+        echo '<p><h4><b>Tiểu sử:</b></h4> ' . $row_tacgia["tieusu"] . '</p>';
+
+        $sql_sach_tacgia = "SELECT tensach FROM sach WHERE tacgia_id = $tacgia_id";
+        $result_sach_tacgia = $conn->query($sql_sach_tacgia);
+
+        if ($result_sach_tacgia->num_rows > 0) {
+          echo '<h4><b>Các sách của tác giả:</b></h4>';
+          echo '<ul>';
+          while ($row_sach_tacgia = $result_sach_tacgia->fetch_assoc()) {
+            echo '<li>' . $row_sach_tacgia["tensach"] . '</li>';
+          }
+          echo '</ul>';
+        } else {
+          echo '<p>Tác giả này không có sách nào trong cơ sở dữ liệu.</p>';
+        }
+      } else {
+        echo "Không tìm thấy thông tin tác giả.";
+      }
+    } else {
+      echo "Thiếu tham số tacgia_id.";
+    }
+
+    $conn->close();
+    ?>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Liên hệ</h4>
+          <p>Địa chỉ: HNAB205 - HUMG</p>
+          <p>Email: h061@gmail.com</p>
+          <p>Điện thoại: 0123456789</p>
+        </div>
+        <div class="col-md-4">
+          <h4>Bản quyền</h4>
+          <p>&copy; 2023 Hà Tấn Tường</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
