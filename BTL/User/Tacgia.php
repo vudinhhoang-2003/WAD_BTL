@@ -85,7 +85,8 @@
         require 'connect.php';
 
         // Truy vấn dữ liệu từ bảng tacgia
-        $sql_tacgia = "SELECT * FROM tacgia";
+        $sql_tacgia = "SELECT * FROM tacgia ORDER BY RAND()
+        LIMIT 8";
         $result_tacgia = $conn->query($sql_tacgia);
 
         // Kiểm tra và hiển thị thông tin tác giả
