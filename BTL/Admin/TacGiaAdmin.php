@@ -56,13 +56,13 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="Home.php" style="color: green;">DocSachOnline</a>
+        <a class="navbar-brand" href="HomeAdmin.php" style="color: green;">DocSachOnline</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="Home.php">Trang chủ</a></li>
+        <li class="active"><a href="HomeAdmin.php">Trang chủ</a></li>
         <?php echo $theloai_dropdown; ?>
         <li><a href="TheLoai.php">Sửa thể loại</a></li>
-        <li><a href="Tacgia.php">Tác giả</a></li>
+        <li><a href="TacgiaAdmin.php">Tác giả</a></li>
       </ul>
       <form class="navbar-form navbar-right" action="Timkiem.php">
         <div class="form-group">
