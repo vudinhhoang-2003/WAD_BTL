@@ -30,24 +30,39 @@
         </div>
     </header>
 
+    <?php
+    require 'connect.php';
+
+    // Truy vấn để lấy thông tin các thể loại
+    $sql_select = "SELECT * FROM theloai";
+    $result = $conn->query($sql_select);
+
+    // Kiểm tra kết quả truy vấn
+    if ($result->num_rows > 0) {
+        $theloai_dropdown = "<li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='#'>Thể loại<span class='caret'></span></a><ul class='dropdown-menu' style='background: lightyellow;'>";
+
+        while ($row = $result->fetch_assoc()) {
+            $theloai_dropdown .= "<li><a href='" . $row['duongdan'] . "'>" . $row['tentheloai'] . "</a></li>";
+        }
+
+        $theloai_dropdown .= "</ul></li>";
+    } else {
+        $theloai_dropdown = "<li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='#'>Thể loại<span class='caret'></span></a><ul class='dropdown-menu' style='background: lightyellow;'><li>Không có thể loại nào.</li></ul></li>";
+    }
+
+    $conn->close();
+    ?>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="HomeAdmin.php" style="color: green;">DocSachOnline</a>
+                <a class="navbar-brand" href="Home.php" style="color: green;">DocSachOnline</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="HomeAdmin.php">Trang chủ</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Thể loại<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../User/TruyenTranh.php">Truyện tranh</a></li>
-                        <li><a href="LichSu.php">Lịch sử Việt Nam</a></li>
-                        <li><a href="../User/VanHoc.php">Văn học</a></li>
-                        <li><a href="Khac.php">Các thể loại khác</a></li>
-                    </ul>
-                </li>
-                <li class="active"><a href="#">Tác giả</a></li>
+                <li class="active"><a href="Home.php">Trang chủ</a></li>
+                <?php echo $theloai_dropdown; ?>
+                <li><a href="Tacgia.php">Tác giả</a></li>
             </ul>
-            <form class="navbar-form navbar-right" action="">
+            <form class="navbar-form navbar-right" action="Timkiem.php">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search" name="search">
                 </div>
@@ -55,7 +70,6 @@
                     <i class="fas fa-search"></i> <!-- Icon tìm kiếm từ Font Awesome -->
                 </button>
             </form>
-            <a href="login.html" class="btn btn-danger navbar-btn navbar-right">Logout</a>
 
         </div>
     </nav>
@@ -89,7 +103,14 @@
                             } else {
                                 echo '<h5>Tác giả không xác định</h5>';
                             }
-                            echo '</div></div></div>';
+
+                            echo '</div>
+                                    <div class="btn-group">
+                                        <a href="SuaSach.php?sach_id=' . $row["sach_id"] . '" class="btn btn-warning">Sửa</a>
+                                        <a href="XoaSach.php?sach_id=' . $row["sach_id"] . '" class="btn btn-danger" onclick="return confirm(\'Bạn có chắc muốn xóa không?\')" ><i class="fas fa-trash-alt"></i>Xóa</a>
+                                    </div>
+                                </div>
+                            </div>';
                         }
                     } else {
                         echo "";
@@ -109,6 +130,8 @@
                             </a>
                             <h3><a href="../User/ThongTinTacGia.php?tacgia_id=' . $row_tacgia["tacgia_id"] . '">' . $row_tacgia["tentacgia"] . '</a></h3>
                             <p>(Ngày sinh: ' . $row_tacgia["ngaysinh"] . ')</p>
+                            <a href="SuaTacGia.php?tacgia_id=' . $row_tacgia["tacgia_id"] . '" class="btn btn-warning"><i class="fas fa-edit"></i> Sửa</a>
+                            <a href="XoaTacGia.php?tacgia_id=' . $row_tacgia["tacgia_id"] . '" class="btn btn-danger" onclick="return confirm(\'Bạn có chắc muốn xóa không?\')"><i class="fas fa-trash-alt"></i> Xóa</a>
                         </div>
                     </div>';
                         }
