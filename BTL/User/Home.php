@@ -30,32 +30,49 @@
   </header>
 
 
+  <?php
+  require 'connect.php';
+
+  // Truy vấn để lấy thông tin các thể loại
+  $sql_select = "SELECT * FROM theloai";
+  $result = $conn->query($sql_select);
+
+  // Kiểm tra kết quả truy vấn
+  if ($result->num_rows > 0) {
+      $theloai_dropdown = "<li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='#'>Thể loại<span class='caret'></span></a><ul class='dropdown-menu' style='background: lightyellow;'>";
+
+      while ($row = $result->fetch_assoc()) {
+          $theloai_dropdown .= "<li><a href='" . $row['duongdan'] . "'>" . $row['tentheloai'] . "</a></li>";
+      }
+
+      $theloai_dropdown .= "</ul></li>";
+  } else {
+      $theloai_dropdown = "<li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='#'>Thể loại<span class='caret'></span></a><ul class='dropdown-menu' style='background: lightyellow;'><li>Không có thể loại nào.</li></ul></li>";
+  }
+
+  $conn->close();
+  ?>
+
   <!-- Thanh menu -->
   <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="Home.php" style="color: green;">DocSachOnline</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="Home.php">Trang chủ</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Thể loại<span class="caret"></span></a>
-          <ul class="dropdown-menu" style="background: lightyellow;">
-            <li><a href="TruyenTranh.php">Truyện tranh</a></li>
-            <li><a href="">Lịch sử Việt Nam</a></li>
-            <li><a href="VanHoc.php">Văn học</a></li>
-            <li><a href="">Các thể loại khác</a></li>
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="Home.php" style="color: green;">DocSachOnline</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li class="active"><a href="Home.php">Trang chủ</a></li>
+              <?php echo $theloai_dropdown; ?>
+              <li><a href="Tacgia.php">Tác giả</a></li>
           </ul>
-        </li>
-        <li><a href="TacGia.php">Tác giả</a></li>
-      </ul>
-      <form class="navbar-form navbar-right" action="Timkiem.php">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Tìm kiếm" name="search">
-        </div>
-        <button type="submit" class="btn btn-secondary">Tìm kiếm</button>
-      </form>
-    </div>
+          <form class="navbar-form navbar-right" action="Timkiem.php">
+              <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Tìm kiếm" name="search">
+              </div>
+              <button type="submit" class="btn btn-secondary">Tìm kiếm</button>
+          </form>
+      </div>
   </nav>
+
 
 
   <!-- Nội dung chính -->
@@ -68,7 +85,9 @@
 
           $sql = "SELECT sach.*, tacgia.tentacgia
                   FROM sach
-                  LEFT JOIN tacgia ON sach.tacgia_id = tacgia.tacgia_id";
+                  LEFT JOIN tacgia ON sach.tacgia_id = tacgia.tacgia_id
+                  ORDER BY RAND()
+                  LIMIT 8";
 
           $result = $conn->query($sql);
 

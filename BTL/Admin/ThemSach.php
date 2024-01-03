@@ -10,12 +10,11 @@
         $ngayxuatban = $_POST['ngayxuatban'];
         $theloai_id = $_POST['theloai_id'];
         $hinhanh = $_POST['hinhanh'];
-        $mota = $_POST['mota'];
         $noidung = $_POST['noidung'];
 
         // Validate và thêm dữ liệu vào cơ sở dữ liệu
         $sql_them_sach = "INSERT INTO sach (tensach, tacgia_id, ngayxuatban, theloai_id, hinhanh, mota, noidung)
-                        VALUES ('$tensach', '$tacgia_id', '$ngayxuatban', '$theloai_id', '$hinhanh', '$mota', '$noidung')";
+                        VALUES ('$tensach', '$tacgia_id', '$ngayxuatban', '$theloai_id', '$hinhanh', '$noidung')";
 
         if ($conn->query($sql_them_sach) === TRUE) {
             // Sau khi thêm thành công, chuyển hướng về trang chủ
@@ -95,10 +94,6 @@
                 <input type="text" class="form-control"  name="hinhanh" required>
             </div>
 
-            <div class="form-group">
-                <label for="mota">Mô Tả:</label>
-                <textarea class="form-control" name="mota" rows="3" required></textarea>
-            </div>
 
             <div class="form-group">
                 <label for="noidung">Nội Dung:</label>

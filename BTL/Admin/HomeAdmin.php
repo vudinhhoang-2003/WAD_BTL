@@ -1,5 +1,5 @@
 <?php
-//  VŨ ĐÌNH HOÀNG - 2121050409 
+//  VŨ ĐÌNH HOÀNG - 2121050409
 session_start();
 
 // Kiểm tra xem người dùng đã đăng nhập hay chưa
@@ -42,33 +42,51 @@ if (!isset($_SESSION['username'])) {
     </div>
   </header>
 
+  <?php
+  require 'connect.php';
+
+  // Truy vấn để lấy thông tin các thể loại
+  $sql_select = "SELECT * FROM theloai";
+  $result = $conn->query($sql_select);
+
+  // Kiểm tra kết quả truy vấn
+  if ($result->num_rows > 0) {
+      $theloai_dropdown = "<li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='#'>Thể loại<span class='caret'></span></a><ul class='dropdown-menu' style='background: lightyellow;'>";
+
+      while ($row = $result->fetch_assoc()) {
+          $theloai_dropdown .= "<li><a href='" . $row['duongdan'] . "'>" . $row['tentheloai'] . "</a></li>";
+      }
+
+      $theloai_dropdown .= "</ul></li>";
+  } else {
+      $theloai_dropdown = "<li class='dropdown'><a class='dropdown-toggle' data-toggle='dropdown' href='#'>Thể loại<span class='caret'></span></a><ul class='dropdown-menu' style='background: lightyellow;'><li>Không có thể loại nào.</li></ul></li>";
+  }
+
+  $conn->close();
+  ?>
+
   <!-- Thanh menu -->
   <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="HomeAdmin.php" style="color: green;">DocSachOnline</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="HomeAdmin.php">Trang chủ</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Thể loại<span class="caret"></span></a>
-          <ul class="dropdown-menu" style="background: lightyellow;">
-            <li><a href="TruyenTranh.html">Truyện tranh</a></li>
-            <li><a href="LichSu.html">Lịch sử Việt Nam</a></li>
-            <li><a href="VanHoc.html">Văn học</a></li>
-            <li><a href="Khac.html">Các thể loại khác</a></li>
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="HomeAdmin.php" style="color: green;">DocSachOnline</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li class="active"><a href="HomeAdmin.php">Trang chủ</a></li>
+              <?php echo $theloai_dropdown; ?>
+              <li><a href="TheLoai.php">Sửa thể loại</a></li>
+              <li><a href="TacGiaAdmin.php">Tác giả</a></li>
           </ul>
-        </li>
-        <li><a href="TacGiaAdmin.php">Tác giả</a></li>
-      </ul>
-      <form class="navbar-form navbar-right" action="Timkiem.php">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Tìm kiếm" name="search">
-        </div>
-        <button type="submit" class="btn btn-secondary">Tìm kiếm</button>
-      </form>
-      <a href="login.html" class="btn btn-danger navbar-btn navbar-right">Logout</a>
-    </div>
+          <form class="navbar-form navbar-right" action="Timkiem.php">
+              <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Tìm kiếm" name="search">
+              </div>
+              <button type="submit" class="btn btn-secondary">Tìm kiếm</button>
+          </form>
+          <a href="login.html" class="btn btn-danger navbar-btn navbar-right">Logout</a>
+      </div>
   </nav>
+
 
   <!-- Nút Thêm -->
   <div class="container">

@@ -1,7 +1,7 @@
 <?php
 require 'connect.php';
 // VŨ ĐÌNH HOÀNG - 2121050409
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['Username'];
     $password = $_POST['Password'];
 
@@ -29,14 +29,14 @@ require 'connect.php';
 
     // Lưu đăng nhập
     session_start();
-    $_SESSION['id'] = $id;
+    $_SESSION['username'] = $id;
 
     // Chuyển hướng đến trang chủ tương ứng
     header("Location: HomeAdmin.php");
     exit;
-// } else {
-//     // Redirect về trang đăng nhập nếu không phải là phương thức POST
-//     header("Location: login.html");
-//     exit;
-// }
+} else {
+    // Redirect về trang đăng nhập nếu không phải là phương thức POST
+    header("Location: login.html");
+    exit;
+}
 ?>
