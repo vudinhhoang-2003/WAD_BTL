@@ -1,3 +1,4 @@
+<!-- Hà Tấn Tường-2121050164 -->
 <?php
 require 'connect.php'; // Kết nối đến cơ sở dữ liệu
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sửa thông tin tác giả</title>
+    <title>Sửa thông tin tác giả_Hà Tấn Tường-2121050164</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script>
         function showSuccessMessage() {
