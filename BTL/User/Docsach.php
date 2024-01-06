@@ -101,7 +101,8 @@
               echo '<h5>Tác giả không xác định</h5>';
             }
             echo '<h4>' . $row["ngayxuatban"] . '</h4>';
-            echo '<p>Nội dung: ' . $row["noidung"] . '</p>';
+            echo '<h2>Nội dung:</h2>';
+            echo '<p>' . nl2br($row["noidung"]) . '</p>';
           } else {
             echo "Không tìm thấy thông tin sách.";
           }

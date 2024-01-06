@@ -90,7 +90,7 @@
         $row_tacgia = $result_tacgia->fetch_assoc();
         echo '<h1>' . $row_tacgia["tentacgia"] . '</h1>';
         echo '<p>Năm sinh: ' . $row_tacgia["ngaysinh"] . '</p>';
-        echo '<p>Tiểu sử: ' . $row_tacgia["tieusu"] . '</p>';
+        echo '<p>Tiểu sử: ' . nl2br($row_tacgia["tieusu"]) . '</p>';
 
         $sql_sach_tacgia = "SELECT tensach FROM sach WHERE tacgia_id = $tacgia_id";
         $result_sach_tacgia = $conn->query($sql_sach_tacgia);
